@@ -16,6 +16,45 @@ sudo ~/.pyenv/shims/hid-recorder
 gcc datetime-keyboard.c -o datetime-keyboard -lhidapi-hidraw && sudo ./datetime-keyboard
 
 */
+
+#include <time.h>
+#include <hidapi/hidapi.h>
+
+// int send_clock(hid_device *dev)
+// {
+// 	time_t now = time(NULL);
+// 	struct tm *t = localtime(&now);
+//
+// 	unsigned char report[65] = {0};
+//
+// 	report[0] = 0x04;    // Report ID
+// 	report[1] = 0x20;    // Config command
+// 	report[2] = 0x00;    // Reserved
+// 	report[3] = 0x1A;    // RTC command
+// 	report[4] = 0x06;    // 6-byte payload
+//
+// 	report[5] = (t->tm_year + 1900) % 100;  // YY
+// 	report[6] = t->tm_mon + 1;              // MM
+// 	report[7] = t->tm_mday;                 // DD
+// 	report[8] = t->tm_hour;                 // HH
+// 	report[9] = t->tm_min;                  // MM
+// 	report[10] = t->tm_sec;                 // SS
+//
+// 	return hid_write(dev, report, sizeof(report));
+// }
+
+// static unsigned char bcd(unsigned int x)
+// {
+// 	return ((x / 10) << 4) | (x % 10);
+// }
+
+// report[5] = bcd((t->tm_year + 1900) % 100);
+// report[6] = bcd(t->tm_mon + 1);
+// report[7] = bcd(t->tm_mday);
+// report[8] = bcd(t->tm_hour);
+// report[9] = bcd(t->tm_min);
+// report[10] = bcd(t->tm_sec);
+
 int main(void)
 {
 
